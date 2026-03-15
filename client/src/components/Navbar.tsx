@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -48,10 +48,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 gap-4">
           {/* Logo */}
           <a href="#home" className="flex items-center gap-2 flex-shrink-0" data-testid="link-logo">
-            <div className="relative w-8 h-8">
-              <div className="absolute inset-0 bg-primary rounded-sm rotate-45 animate-pulse-glow" />
-              <Zap className="relative z-10 w-8 h-8 text-primary-foreground p-1" />
-            </div>
+            <img
+              src="/images/metaracing-logo.png"
+              alt="MetaRacing Logo"
+              className="h-10 w-10 object-contain"
+            />
             <span className="font-racing text-xl font-bold tracking-widest uppercase glow-red text-foreground">
               Meta<span className="text-primary">Racing</span>
             </span>

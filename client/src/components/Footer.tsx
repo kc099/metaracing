@@ -1,4 +1,4 @@
-import { Zap, Instagram, Youtube, Twitter, Facebook } from "lucide-react";
+import { Instagram, Youtube, Twitter, Facebook, Zap } from "lucide-react";
 
 const footerLinks = {
   Experiences: ["Racing Simulator", "FPV RC Arena", "Group Events", "Corporate Packages"],
@@ -39,10 +39,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-4 lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="relative w-8 h-8">
-                <div className="absolute inset-0 bg-primary rounded-sm rotate-45" />
-                <Zap className="relative z-10 w-8 h-8 text-primary-foreground p-1" />
-              </div>
+              <img
+                src="/images/metaracing-logo.png"
+                alt="MetaRacing Logo"
+                className="h-10 w-10 object-contain"
+              />
               <span className="font-racing text-xl font-bold tracking-widest uppercase text-foreground">
                 Meta<span className="text-primary">Racing</span>
               </span>

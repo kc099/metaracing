@@ -10,7 +10,7 @@ const plans = [
     name: "Starter",
     icon: Zap,
     category: "Both",
-    price: { sim: 15, fpv: 12 },
+    price: { sim: 499, fpv: 399 },
     duration: "30 min",
     color: "border-border/50",
     accentColor: "text-muted-foreground",
@@ -29,7 +29,7 @@ const plans = [
     name: "Racer",
     icon: Star,
     category: "Both",
-    price: { sim: 25, fpv: 22 },
+    price: { sim: 799, fpv: 699 },
     duration: "1 hour",
     color: "border-primary/50 glow-border-red",
     accentColor: "text-primary",
@@ -49,7 +49,7 @@ const plans = [
     name: "Champion",
     icon: Crown,
     category: "VIP",
-    price: { sim: 45, fpv: 45 },
+    price: { sim: 1499, fpv: 1499 },
     duration: "2 hours",
     color: "border-accent/50 glow-border-cyan",
     accentColor: "text-accent",
@@ -70,7 +70,7 @@ const plans = [
     name: "Squad",
     icon: Users,
     category: "Group",
-    price: { sim: 18, fpv: 16 },
+    price: { sim: 599, fpv: 499 },
     duration: "Per person",
     color: "border-border/50",
     accentColor: "text-muted-foreground",
@@ -166,7 +166,7 @@ export default function PricingSection() {
 
                   <div className="flex items-baseline gap-1 mt-2">
                     <span className={`font-racing text-4xl font-bold ${plan.accentColor}`}>
-                      ${mode === "sim" ? plan.price.sim : plan.price.fpv}
+                      ₹{(mode === "sim" ? plan.price.sim : plan.price.fpv).toLocaleString("en-IN")}
                     </span>
                     <span className="text-xs text-muted-foreground">/ {plan.duration}</span>
                   </div>
