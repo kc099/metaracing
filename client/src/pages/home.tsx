@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import VideoTeaser from "@/components/VideoTeaser";
 import HeroSection from "@/components/HeroSection";
 import ExperiencesSection from "@/components/ExperiencesSection";
 import PricingSection from "@/components/PricingSection";
@@ -46,11 +47,9 @@ function WhyUsSection() {
   return (
     <section className="py-24 relative overflow-hidden" data-testid="section-why-us">
       <div className="absolute top-0 left-0 right-0 h-px neon-divider opacity-40" />
-
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 right-1/4 w-72 h-72 rounded-full bg-accent/5 blur-3xl" />
       </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-14">
           <Badge variant="outline" className="border-primary/40 text-primary font-racing text-xs tracking-widest uppercase mb-4">
@@ -63,16 +62,11 @@ function WhyUsSection() {
             We don't just offer a game — we deliver a full racing experience that pushes boundaries every time you visit.
           </p>
         </div>
-
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {whyUs.map((item) => {
             const Icon = item.icon;
             return (
-              <Card
-                key={item.title}
-                className="border-border/40 hover-elevate group"
-                data-testid={`why-card-${item.title.toLowerCase().replace(/\s/g, "-")}`}
-              >
+              <Card key={item.title} className="border-border/40 hover-elevate group" data-testid={`why-card-${item.title.toLowerCase().replace(/\s/g, "-")}`}>
                 <CardContent className="p-6">
                   <div className="w-11 h-11 rounded-md bg-primary/10 border border-primary/20 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                     <Icon className="w-5 h-5 text-primary" />
@@ -93,7 +87,6 @@ function TestimonialsSection() {
   return (
     <section className="py-20 relative overflow-hidden" data-testid="section-testimonials">
       <div className="absolute top-0 left-0 right-0 h-px neon-divider opacity-40" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
           <Badge variant="outline" className="border-primary/40 text-primary font-racing text-xs tracking-widest uppercase mb-4">
@@ -103,25 +96,16 @@ function TestimonialsSection() {
             Hear From The <span className="text-primary">Track</span>
           </h2>
         </div>
-
         <div className="grid md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
-            <Card
-              key={t.name}
-              className="border-border/40 hover-elevate"
-              data-testid={`testimonial-card-${t.name.replace(/\s/g, "-").replace(".", "").toLowerCase()}`}
-            >
+            <Card key={t.name} className="border-border/40 hover-elevate" data-testid={`testimonial-card-${t.name.replace(/\s/g, "-").replace(".", "").toLowerCase()}`}>
               <CardContent className="p-6">
                 <div className="flex items-center gap-1 mb-4">
                   {Array.from({ length: t.rating }).map((_, i) => (
                     <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
                   ))}
                 </div>
-
-                <p className="text-sm text-muted-foreground leading-relaxed mb-5 italic">
-                  "{t.text}"
-                </p>
-
+                <p className="text-sm text-muted-foreground leading-relaxed mb-5 italic">"{t.text}"</p>
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-sm font-semibold text-foreground">{t.name}</div>
@@ -144,7 +128,6 @@ function GallerySection() {
   return (
     <section className="py-16 overflow-hidden" data-testid="section-gallery">
       <div className="absolute top-0 left-0 right-0 h-px neon-divider opacity-40" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <Badge variant="outline" className="border-accent/40 text-accent font-racing text-xs tracking-widest uppercase mb-4">
@@ -154,38 +137,37 @@ function GallerySection() {
             The <span className="text-accent">Arena</span>
           </h2>
         </div>
-
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <div className="col-span-2 row-span-2 relative rounded-lg overflow-hidden aspect-square md:aspect-auto hover-elevate group">
-            <img src="/images/racing-sim.png" alt="Racing Simulator Setup" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-testid="gallery-img-sim" />
+            <img src="/images/racing-sim.png" alt="Racing Simulator Setup" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
             <div className="absolute bottom-4 left-4">
               <span className="font-racing text-sm uppercase tracking-widest text-foreground">Simulator Bay</span>
             </div>
           </div>
           <div className="relative rounded-lg overflow-hidden aspect-video hover-elevate group">
-            <img src="/images/fpv-arena.png" alt="FPV Arena" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-testid="gallery-img-fpv" />
+            <img src="/images/fpv-arena.png" alt="FPV Arena" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
             <div className="absolute bottom-3 left-3">
               <span className="font-racing text-xs uppercase tracking-widest text-accent">FPV Arena</span>
             </div>
           </div>
           <div className="relative rounded-lg overflow-hidden aspect-video hover-elevate group">
-            <img src="/images/steering-wheel.png" alt="Racing Wheel" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-testid="gallery-img-wheel" />
+            <img src="/images/steering-wheel.png" alt="Racing Wheel" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
             <div className="absolute bottom-3 left-3">
               <span className="font-racing text-xs uppercase tracking-widest text-primary">Pro Equipment</span>
             </div>
           </div>
           <div className="relative rounded-lg overflow-hidden aspect-video hover-elevate group">
-            <img src="/images/hero-bg.png" alt="Racing Track" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-testid="gallery-img-track" />
+            <img src="/images/hero-bg.png" alt="Racing Track" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
             <div className="absolute bottom-3 left-3">
               <span className="font-racing text-xs uppercase tracking-widest text-foreground">The Track</span>
             </div>
           </div>
           <div className="relative rounded-lg overflow-hidden aspect-video hover-elevate group">
-            <img src="/images/fpv-arena.png" alt="Racing Night" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-testid="gallery-img-night" />
+            <img src="/images/fpv-arena.png" alt="Night Racing" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/70 to-transparent" />
             <div className="absolute bottom-3 left-3">
               <span className="font-racing text-xs uppercase tracking-widest text-accent">Night Races</span>
@@ -201,6 +183,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <VideoTeaser />
       <HeroSection />
       <ExperiencesSection />
       <WhyUsSection />

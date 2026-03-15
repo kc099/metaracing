@@ -1,100 +1,105 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Check, Zap, Crown, Users, Star } from "lucide-react";
-import { useState } from "react";
+import { Check, Zap, Users, Trophy, Star, Clock, Moon } from "lucide-react";
 
 const plans = [
   {
     id: "starter",
     name: "Starter",
     icon: Zap,
-    category: "Both",
-    price: { sim: 499, fpv: 399 },
-    duration: "30 min",
-    color: "border-border/50",
-    accentColor: "text-muted-foreground",
-    badgeColor: "bg-secondary text-secondary-foreground",
+    tag: "Single",
+    price30: 249,
+    priceHour: 449,
+    showDualRate: true,
+    borderClass: "border-border/50",
+    accentClass: "text-muted-foreground",
+    iconBg: "bg-secondary border-border/40",
+    popular: false,
     features: [
-      "30-minute session",
-      "Equipment training included",
-      "1 experience (Sim or FPV)",
+      "Sim Racing or FPV (your choice)",
+      "30 min / 1 hour session",
+      "Safety gear included",
+      "Equipment briefing",
       "Digital lap time record",
       "Locker access",
     ],
-    popular: false,
   },
   {
     id: "racer",
     name: "Racer",
     icon: Star,
-    category: "Both",
-    price: { sim: 799, fpv: 699 },
-    duration: "1 hour",
-    color: "border-primary/50 glow-border-red",
-    accentColor: "text-primary",
-    badgeColor: "bg-primary text-primary-foreground",
-    features: [
-      "60-minute session",
-      "Both Sim & FPV access",
-      "Priority lane booking",
-      "Leaderboard tracking",
-      "Pit crew coaching (15 min)",
-      "Free refreshments",
-    ],
+    tag: "Premium",
+    price30: 299,
+    priceHour: 549,
+    showDualRate: true,
+    borderClass: "border-primary/50 glow-border-red",
+    accentClass: "text-primary",
+    iconBg: "bg-primary/15 border-primary/30",
     popular: true,
-  },
-  {
-    id: "champion",
-    name: "Champion",
-    icon: Crown,
-    category: "VIP",
-    price: { sim: 1499, fpv: 1499 },
-    duration: "2 hours",
-    color: "border-accent/50 glow-border-cyan",
-    accentColor: "text-accent",
-    badgeColor: "bg-accent text-accent-foreground",
     features: [
-      "2-hour VIP session",
-      "Full venue access",
-      "Private coaching session",
-      "Custom lap data analysis",
-      "Group up to 4 people",
-      "Premium lounge access",
-      "Branded race report",
+      "Sim Racing or FPV (your choice)",
+      "30 min / 1 hour session",
+      "Priority track access",
+      "Leaderboard tracking",
+      "15-min pit crew coaching",
+      "Free refreshments",
+      "Dedicated support",
     ],
-    popular: false,
   },
   {
-    id: "group",
+    id: "squad",
     name: "Squad",
     icon: Users,
-    category: "Group",
-    price: { sim: 599, fpv: 499 },
-    duration: "Per person",
-    color: "border-border/50",
-    accentColor: "text-muted-foreground",
-    badgeColor: "bg-secondary text-secondary-foreground",
+    tag: "Group",
+    price30: null,
+    priceHour: 499,
+    perNote: "per person · 4–6 members",
+    showDualRate: false,
+    borderClass: "border-accent/40 glow-border-cyan",
+    accentClass: "text-accent",
+    iconBg: "bg-accent/15 border-accent/30",
+    popular: false,
     features: [
-      "Min 5 people",
-      "1.5-hour group session",
+      "4 to 6 racers per session",
+      "1-hour group session",
       "Team championship format",
       "Group leaderboard",
       "Team photo & video",
       "Discounted food & drinks",
+      "Group event coordinator",
     ],
+  },
+  {
+    id: "tournament",
+    name: "Tournament",
+    icon: Trophy,
+    tag: "Pro · After 10PM",
+    price30: null,
+    priceHour: 999,
+    perNote: "per session · pro racing",
+    showDualRate: false,
+    borderClass: "border-amber-500/50",
+    accentClass: "text-amber-400",
+    iconBg: "bg-amber-500/15 border-amber-500/30",
     popular: false,
+    nightOnly: true,
+    features: [
+      "After 10 PM slots only",
+      "Professional race format",
+      "Full sim & FPV access",
+      "Live race commentary",
+      "Official timing system",
+      "Winner's trophy & prize",
+      "Pro coaching available",
+    ],
   },
 ];
 
 export default function PricingSection() {
-  const [mode, setMode] = useState<"sim" | "fpv">("sim");
-
   return (
     <section id="pricing" className="py-24 relative overflow-hidden" data-testid="section-pricing">
       <div className="absolute top-0 left-0 right-0 h-px neon-divider opacity-40" />
-
-      {/* Background */}
       <div className="absolute inset-0 pointer-events-none checkered-bg opacity-30" />
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
 
@@ -106,31 +111,9 @@ export default function PricingSection() {
           <h2 className="font-racing text-4xl md:text-5xl font-bold uppercase tracking-tight text-foreground mb-4">
             Race Your <span className="text-primary">Way</span>
           </h2>
-          <p className="text-muted-foreground max-w-xl mx-auto text-base leading-relaxed mb-8">
-            Flexible packages for every type of racer — from casual speed seekers to championship contenders.
+          <p className="text-muted-foreground max-w-xl mx-auto text-base leading-relaxed">
+            Flexible packages for every type of racer. All prices in INR, inclusive of equipment and safety briefing.
           </p>
-
-          {/* Mode toggle */}
-          <div className="inline-flex bg-card border border-border/50 rounded-md p-1 gap-1">
-            <button
-              onClick={() => setMode("sim")}
-              data-testid="pricing-toggle-sim"
-              className={`px-5 py-2 rounded-sm text-sm font-racing uppercase tracking-widest transition-all duration-200 ${
-                mode === "sim" ? "bg-primary text-primary-foreground" : "text-muted-foreground"
-              }`}
-            >
-              Sim Racing
-            </button>
-            <button
-              onClick={() => setMode("fpv")}
-              data-testid="pricing-toggle-fpv"
-              className={`px-5 py-2 rounded-sm text-sm font-racing uppercase tracking-widest transition-all duration-200 ${
-                mode === "fpv" ? "bg-accent text-accent-foreground" : "text-muted-foreground"
-              }`}
-            >
-              FPV Arena
-            </button>
-          </div>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -139,7 +122,7 @@ export default function PricingSection() {
             return (
               <Card
                 key={plan.id}
-                className={`relative border ${plan.color} bg-card transition-transform duration-200`}
+                className={`relative border ${plan.borderClass} bg-card transition-transform duration-200`}
                 data-testid={`pricing-card-${plan.id}`}
               >
                 {plan.popular && (
@@ -149,14 +132,22 @@ export default function PricingSection() {
                     </Badge>
                   </div>
                 )}
+                {plan.nightOnly && (
+                  <div className="absolute -top-3 right-3 z-10">
+                    <Badge className="bg-amber-500/80 text-amber-950 font-racing text-xs uppercase px-2 flex items-center gap-1">
+                      <Moon className="w-3 h-3" />
+                      Night
+                    </Badge>
+                  </div>
+                )}
 
                 <CardHeader className="pb-2 pt-6">
                   <div className="flex items-center justify-between mb-3">
-                    <div className={`w-10 h-10 rounded-md ${plan.popular ? "bg-primary/15 border border-primary/30" : "bg-secondary border border-border/40"} flex items-center justify-center`}>
-                      <Icon className={`w-5 h-5 ${plan.accentColor}`} />
+                    <div className={`w-10 h-10 rounded-md border ${plan.iconBg} flex items-center justify-center`}>
+                      <Icon className={`w-5 h-5 ${plan.accentClass}`} />
                     </div>
-                    <span className={`text-xs font-racing uppercase tracking-widest px-2 py-0.5 rounded-sm ${plan.badgeColor}`}>
-                      {plan.category}
+                    <span className="text-xs font-racing uppercase tracking-widest text-muted-foreground">
+                      {plan.tag}
                     </span>
                   </div>
 
@@ -164,19 +155,44 @@ export default function PricingSection() {
                     {plan.name}
                   </div>
 
-                  <div className="flex items-baseline gap-1 mt-2">
-                    <span className={`font-racing text-4xl font-bold ${plan.accentColor}`}>
-                      ₹{(mode === "sim" ? plan.price.sim : plan.price.fpv).toLocaleString("en-IN")}
-                    </span>
-                    <span className="text-xs text-muted-foreground">/ {plan.duration}</span>
-                  </div>
+                  {/* Price display */}
+                  {plan.showDualRate ? (
+                    <div className="mt-2 space-y-1">
+                      <div className="flex items-baseline gap-1">
+                        <span className={`font-racing text-3xl font-bold ${plan.accentClass}`}>
+                          ₹{plan.price30?.toLocaleString("en-IN")}
+                        </span>
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
+                          <Clock className="w-3 h-3" />/ 30 min
+                        </span>
+                      </div>
+                      <div className="flex items-baseline gap-1">
+                        <span className={`font-racing text-xl font-bold ${plan.accentClass} opacity-70`}>
+                          ₹{plan.priceHour?.toLocaleString("en-IN")}
+                        </span>
+                        <span className="text-xs text-muted-foreground">/ hour</span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="mt-2">
+                      <div className="flex items-baseline gap-1">
+                        <span className={`font-racing text-3xl font-bold ${plan.accentClass}`}>
+                          ₹{plan.priceHour?.toLocaleString("en-IN")}
+                        </span>
+                        <span className="text-xs text-muted-foreground">/ hr</span>
+                      </div>
+                      {plan.perNote && (
+                        <div className="text-xs text-muted-foreground mt-0.5">{plan.perNote}</div>
+                      )}
+                    </div>
+                  )}
                 </CardHeader>
 
                 <CardContent className="pt-4">
                   <div className="space-y-2.5 mb-6">
                     {plan.features.map((feature) => (
-                      <div key={feature} className="flex items-start gap-2.5 text-sm" data-testid={`feature-${plan.id}-${feature.slice(0, 20).replace(/\s/g, "-").toLowerCase()}`}>
-                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.accentColor}`} />
+                      <div key={feature} className="flex items-start gap-2.5 text-sm">
+                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.accentClass}`} />
                         <span className="text-muted-foreground leading-snug">{feature}</span>
                       </div>
                     ))}
@@ -184,13 +200,10 @@ export default function PricingSection() {
 
                   <Button
                     className={`w-full font-racing uppercase tracking-widest ${
-                      plan.popular
-                        ? ""
-                        : plan.id === "champion"
-                        ? "bg-accent text-accent-foreground"
-                        : "variant-outline"
+                      plan.id === "squad" ? "bg-accent text-accent-foreground" :
+                      plan.id === "tournament" ? "bg-amber-500 text-amber-950" : ""
                     }`}
-                    variant={plan.popular ? "default" : plan.id === "champion" ? "default" : "outline"}
+                    variant={plan.popular ? "default" : plan.id === "squad" || plan.id === "tournament" ? "default" : "outline"}
                     asChild
                     data-testid={`button-select-${plan.id}`}
                   >
@@ -203,8 +216,8 @@ export default function PricingSection() {
         </div>
 
         <p className="text-center text-sm text-muted-foreground mt-10">
-          All prices are inclusive of equipment and safety briefing.{" "}
-          <a href="#booking" className="text-primary underline underline-offset-2">Contact us</a> for corporate events and custom packages.
+          All prices include equipment, safety gear, and briefing. Tournament slots only available after 10 PM.{" "}
+          <a href="#booking" className="text-primary underline underline-offset-2">Contact us</a> for corporate & custom packages.
         </p>
       </div>
     </section>

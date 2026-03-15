@@ -1,0 +1,79 @@
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+
+export interface Customer {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface AuthContextType {
+  customer: Customer | null;
+  login: (email: string, password: string) => Promise<void>;
+  register: (name: string, email: string, password: string) => Promise<void>;
+  logout: () => void;
+  isLoading: boolean;
+}
+
+const AuthContext = createContext<AuthContextType | null>(null);
+
+export function AuthProvider({ children }: { children: ReactNode }) {
+  const [customer, setCustomer] = useState<Customer | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("mr_customer");
+    if (stored) {
+      try {
+        setCustomer(JSON.parse(stored));
+      } catch {}
+    }
+    setIsLoading(false);
+  }, []);
+
+  const login = async (email: string, password: string) => {
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || "Login failed");
+    }
+    const data = await res.json();
+    setCustomer(data.customer);
+    localStorage.setItem("mr_customer", JSON.stringify(data.customer));
+  };
+
+  const register = async (name: string, email: string, password: string) => {
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.error || "Registration failed");
+    }
+    const data = await res.json();
+    setCustomer(data.customer);
+    localStorage.setItem("mr_customer", JSON.stringify(data.customer));
+  };
+
+  const logout = () => {
+    setCustomer(null);
+    localStorage.removeItem("mr_customer");
+  };
+
+  return (
+    <AuthContext.Provider value={{ customer, login, register, logout, isLoading }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
+
+export function useAuth() {
+  const ctx = useContext(AuthContext);
+  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
+  return ctx;
+}
