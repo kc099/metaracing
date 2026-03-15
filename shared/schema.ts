@@ -13,6 +13,25 @@ export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
 });
-
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
+
+export const bookings = pgTable("bookings", {
+  id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull(),
+  experience: text("experience").notNull(),
+  plan: text("plan").notNull(),
+  date: text("date").notNull(),
+  guests: text("guests").notNull(),
+  message: text("message").notNull().default(""),
+  createdAt: text("created_at").notNull().default(sql`now()::text`),
+});
+
+export const insertBookingSchema = createInsertSchema(bookings).omit({
+  id: true,
+  createdAt: true,
+});
+export type InsertBooking = z.infer<typeof insertBookingSchema>;
+export type Booking = typeof bookings.$inferSelect;
