@@ -1,6 +1,43 @@
-node_modules
-dist
-.DS_Store
-server/public
-vite.config.ts.*
-*.tar.gz
+# ─────────────────────────────────────────
+#  MetaRacing — .gitignore
+# ─────────────────────────────────────────
+
+# ── Dependencies ──────────────────────────
+node_modules/
+.pnp / .yarn/
+
+# ── Build outputs ─────────────────────────
+dist/  build/  out/  server/public/
+
+# ── Environment & secrets ─────────────────
+.env  .env.local  .env.*  *.env
+
+# ── Logs ──────────────────────────────────
+logs/  *.log  npm-debug.log*  yarn-error.log*
+
+# ── OS files ──────────────────────────────
+.DS_Store  Thumbs.db  Desktop.ini
+
+# ── Editor & IDE ──────────────────────────
+.vscode/  .idea/  *.swp  *~
+
+# ── Vite / TypeScript ─────────────────────
+vite.config.ts.*  *.tsbuildinfo
+
+# ── Cache ─────────────────────────────────
+.cache/  .turbo/  .eslintcache
+
+# ── Testing ───────────────────────────────
+coverage/  .nyc_output/
+
+# ── Replit-specific (do not push) ─────────
+.replit  replit.nix  .upm/  .config/  .local/  .agents/
+
+# ── Miscellaneous ─────────────────────────
+*.tar.gz  *.zip  *.tgz  .tmp/
+
+# ── Generated / AI assets (large files) ───
+# Uncomment to exclude media from git:
+# client/public/images/*.mp4
+# client/public/images/*.png
+# attached_assets/
